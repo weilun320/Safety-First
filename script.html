@@ -1,0 +1,103 @@
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 3000); // Change image every 2 seconds
+}
+
+function passwordVisibility() {
+    var x = document.getElementById("pw");
+    if (x.type == "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
+function check() {
+  if (document.getElementById("pw").value ==
+    document.getElementById("cfmPw").value) {
+    document.getElementById("message").style.color = "green";
+    document.getElementById("message").innerHTML = "Password matched!";
+  } else {
+    document.getElementById("message").style.color = "red";
+    document.getElementById("message").innerHTML = "Password mismatch!";
+  }
+}
+
+function startTime() {
+	var currentDate = new Date();
+	var year = currentDate.getYear();
+		if (year < 1000){
+			year+=1900;
+		}
+	var d = currentDate.getDay();
+	var M = currentDate.getMonth();
+	var D = currentDate.getDate();
+	var dayArray = new Array ("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+	var monthArray = new Array ("January","February","March","April","May","June","July","August","September","October","November","December")
+	
+	var currentTime = new Date();
+	var h = currentTime.getHours();
+	var m = currentTime.getMinutes();
+	var s = currentTime.getSeconds();
+	m = checkTime(m);
+	s = checkTime(s);
+	var myClock = document.getElementById('clock').innerHTML =
+	" " + dayArray[d] + " " + D + " " + monthArray[M] + " " + year + " | " + h + ":" + m + ":" + s;
+	var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+	if (i < 10) {i = "0" + i}; 
+	return i;
+}
+</script>
